@@ -18,19 +18,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .nav-link {
-      display: block;
-      text-align: right;
-      letter-spacing: 0.1em;
-      transition: letter-spacing 0.4s ease, color 0.3s ease, opacity 0.3s ease;
-    }
-    .nav-link:hover {
-      letter-spacing: 0.24em;
-      opacity: 1 !important;
-    }
-    .nav-group:hover .nav-link:not(:hover) {
-      opacity: 0.3;
-    }
 
     @keyframes fadeBlur {
       from { opacity: 0; filter: blur(6px); letter-spacing: 0.18em; }
@@ -128,21 +115,12 @@
     <p class="fade-blur absolute top-9 left-10 text-white/50 text-2xl"
        style="font-family:'Great Vibes',cursive; animation-delay:0.9s; z-index:2;">Courage is fear walking</p>
 
-    <!-- Corner nav — bottom right -->
-    <nav id="corner-nav"
-         style="position:fixed; bottom:22px; right:24px; z-index:20; text-align:right; opacity:0.2; transition:opacity 0.4s ease; font-family:'Cormorant Garamond',serif;"
-         onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0.2'">
-      <div style="display:flex; flex-direction:column; gap:7px;">
-        <a href="vlog.html"  style="font-size:13px; letter-spacing:0.1em; color:#fff; text-decoration:none; display:none;">Vlog</a>
-        <a href="story.html" style="font-size:13px; letter-spacing:0.1em; color:#fff; text-decoration:none;">Journey</a>
-      </div>
-    </nav>
 
     <!-- Bottom left: identity -->
     <div class="absolute left-10 flex flex-col" style="bottom: 72px; z-index:3;">
       <h1 class="name-reveal text-white font-normal"
           style="font-family:'Playfair Display',serif; font-size:clamp(26px,3.5vw,46px); letter-spacing:0.18em; animation-delay:0.35s;">
-        VALEN WEI
+        <a href="story.html" style="color:#fff; text-decoration:none;">VALEN WEI</a>
       </h1>
       <p class="name-reveal text-white/40 font-light text-xs mt-2"
          style="letter-spacing:0.32em; animation-delay:0.55s;">
