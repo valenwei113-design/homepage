@@ -91,7 +91,7 @@
     <!-- Full-screen video backgrounds -->
     <video id="bg-vid-0" autoplay muted playsinline
            class="absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms]" style="opacity:1;">
-      <source src="home/iceland.mov" type="video/mp4" />
+      <source src="home/jacaranda.mov" type="video/mp4" />
     </video>
     <video id="bg-vid-1" muted playsinline
            class="absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms]" style="opacity:0;">
@@ -104,6 +104,14 @@
     <video id="bg-vid-3" muted playsinline
            class="absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms]" style="opacity:0;">
       <source src="home/diving.mov" type="video/mp4" />
+    </video>
+    <video id="bg-vid-4" muted playsinline
+           class="absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms]" style="opacity:0;">
+      <source src="home/stavanger.mov" type="video/mp4" />
+    </video>
+    <video id="bg-vid-5" muted playsinline
+           class="absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms]" style="opacity:0;">
+      <source src="home/iceland.mov" type="video/mp4" />
     </video>
 
 
@@ -147,7 +155,7 @@
 
   <script>
     // Video slideshow — each video plays to end then switches to next
-    const videos = [0, 1, 2, 3].map(i => document.getElementById('bg-vid-' + i));
+    const videos = [0, 1, 2, 3, 4, 5].map(i => document.getElementById('bg-vid-' + i));
     let curIdx = 0;
 
     function showVideo(idx) {

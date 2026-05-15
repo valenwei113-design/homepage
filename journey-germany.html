@@ -423,7 +423,7 @@
   <main style="max-width:1080px; margin:0 auto; padding:0 32px 96px;">
 
     <!-- ═══════════ 01 大学类型 ═══════════ -->
-    <section style="padding:72px 0 64px;" class="fade-up" style="animation-delay:0.1s;">
+    <section style="padding:72px 0 64px; animation-delay:0.1s;" class="fade-up">
       <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:12px;">
         <span class="sec-num">01</span>
         <h2 class="sec-title">大学类型</h2>
@@ -668,7 +668,10 @@
   <!-- Lightbox -->
   <div id="lightbox" onclick="closeLightbox()">
     <span id="lightbox-close" onclick="closeLightbox()">×</span>
+    <button id="lightbox-prev" onclick="event.stopPropagation(); navigateLightbox(-1)" style="position:absolute; left:24px; top:50%; transform:translateY(-50%); background:none; border:none; color:rgba(255,255,255,0.5); font-size:36px; font-weight:300; cursor:pointer; line-height:1; padding:8px; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">‹</button>
     <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
+    <button id="lightbox-next" onclick="event.stopPropagation(); navigateLightbox(1)" style="position:absolute; right:24px; top:50%; transform:translateY(-50%); background:none; border:none; color:rgba(255,255,255,0.5); font-size:36px; font-weight:300; cursor:pointer; line-height:1; padding:8px; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">›</button>
+    <div id="lightbox-counter" style="position:absolute; bottom:24px; left:50%; transform:translateX(-50%); color:rgba(255,255,255,0.4); font-size:12px; letter-spacing:0.16em;"></div>
   </div>
 
   <footer style="background:#1a1a1a; border-top:2px solid var(--accent);">
@@ -679,21 +682,46 @@
   </footer>
 
   <script>
-    const lightbox    = document.getElementById('lightbox');
+    const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
-    document.querySelectorAll('.photo-slot img, .gallery-img').forEach(img => {
-      img.addEventListener('click', () => {
-        if (!img.src || img.src === window.location.href) return;
-        lightboxImg.src = img.src;
-        lightbox.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      });
-    });
+    const lightboxCounter = document.getElementById('lightbox-counter');
+
+    let images = [];
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+      currentIndex = index;
+      lightboxImg.src = images[currentIndex];
+      lightboxCounter.textContent = (currentIndex + 1) + ' / ' + images.length;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function navigateLightbox(dir) {
+      currentIndex = (currentIndex + dir + images.length) % images.length;
+      lightboxImg.src = images[currentIndex];
+      lightboxCounter.textContent = (currentIndex + 1) + ' / ' + images.length;
+    }
+
     function closeLightbox() {
       lightbox.classList.remove('open');
       document.body.style.overflow = '';
     }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    document.querySelectorAll('.photo-slot img, .gallery-img').forEach((img, i) => {
+      images.push(img.src);
+      img.addEventListener('click', () => {
+        if (!img.src || img.src === window.location.href) return;
+        openLightbox(i);
+      });
+    });
+
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') navigateLightbox(1);
+      if (e.key === 'ArrowLeft') navigateLightbox(-1);
+    });
 
   </script>
 </body>
